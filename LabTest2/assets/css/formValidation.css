@@ -1,0 +1,14 @@
+@CHARSET "ISO-8859-1";
+@font-face {
+    font-family: 'Script MT Bold'; 
+    src: url(../assets/fonts/SCRIPTBL.woff);
+}
+
+.ng-invalid.ng-dirty{
+border-color: #CC0000;
+border-width: 50%;
+}
+.ng-valid.ng-dirty{
+    border-color: #009900;
+    border-width: 50%;
+}

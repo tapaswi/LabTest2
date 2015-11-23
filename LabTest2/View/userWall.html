@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  	<meta name="generator" content="Bootply" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<title>Traveller's Wall</title>
+	
+	<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+  	<link rel="stylesheet"  href="../assets/css/zoom.css" media="all" />
+  	<link href="../assets/css/styles.css" rel="stylesheet"/>
+ 	<link href="../assets/css/commentList.css" rel="stylesheet" type="text/css" >
+ 	
+  	<!-- <script src="http://maps.googleapis.com/maps/api/js"></script> -->
+	<style type="text/css">
+    	html, body {
+        	height: 100%;
+        	margin: 0;
+        	padding: 0;
+      	}
+      	#map {
+        	height: 100%;
+      	}
+		.controls {
+  			margin-top: 10px;
+  			border: 1px solid transparent;
+  			border-radius: 2px 0 0 2px;
+  			box-sizing: border-box;
+  			-moz-box-sizing: border-box;
+  			height: 32px;
+  			outline: none;
+  			box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+		}
+		#pac-input {
+  			background-color: #fff;
+  			font-family: Roboto;
+  			font-size: 15px;
+  			font-weight: 300;
+  			margin-left: 12px;
+  			padding: 0 11px 0 13px;
+  			text-overflow: ellipsis;
+  			width: 300px;
+		}
+		#pac-input:focus {
+  			border-color: #4d90fe;
+		}
+		.pac-container {
+  			font-family: Roboto;
+		}
+		#type-selector {
+  			color: #fff;
+  			background-color: #4d90fe;
+  			padding: 5px 11px 0px 11px;
+		}
+		#type-selector label {
+  			font-family: Roboto;
+  			font-size: 13px;
+  			font-weight: 300;
+		}
+    	body {
+	      	overflow-y: scroll;
+	     	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, sans-serif;
+	      	background: #f4f4f4;
+	      	padding: 0;
+	      	margin: 0;
+    	}
+    	h1 {
+      		font-size: 31px;
+      		line-height: 32px;
+      		font-weight: normal;
+      		margin-bottom: 25px;
+    	}
+    	a,
+    	a:hover {
+      		border: none;
+      		text-decoration: none;
+    	}
+    	img,
+    	a img {
+      		border: none;
+    	}
+    	pre {
+      		overflow-x: scroll;
+      		background: #ffffff;
+      		border: 1px solid #cecece;
+      		padding: 10px;
+    	} 
+    	.clear { 
+    		clear: both;  
+    	}
+	    .zoomed > .container {
+    		-webkit-filter: blur(3px);
+      		filter: blur(3px);
+    	} 
+    	.container {
+      		width: 505px;
+      		margin: 0 auto;
+    	} 
+    	.gallery {
+      		float: left;
+      		background: #ffffff;
+      		padding: 10px 10px 10px 10px;
+      		margin: 0;
+      		/* -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+      		-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+      		box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+      		-webkit-border-radius: 2px;
+      		-moz-border-radius: 2px;
+      		border-radius: 2px; */
+    	}
+    	.gallery div {
+      		float: left;
+      		padding: 0 10px 10px 0;
+    	}
+    	.gallery div:nth-child(6n) {
+      		padding-right: 0;
+    	}
+    	.gallery a,
+    	.gallery img {
+      		float: left;
+    	}
+    	    	
+    	/* .blog-comment::before,
+		.blog-comment::after,
+		.blog-comment-form::before,
+		.blog-comment-form::after{
+		    content: "";
+			display: table;
+			clear: both;
+		}
+		
+		.blog-comment{
+		    padding-left: 15%;
+			padding-right: 15%;
+		}
+		
+		.blog-comment ul{
+			list-style-type: none;
+			padding: 0;
+		}
+		
+		.blog-comment img{
+			opacity: 1;
+			filter: Alpha(opacity=100);
+			-webkit-border-radius: 4px;
+			   -moz-border-radius: 4px;
+			  	 -o-border-radius: 4px;
+					border-radius: 4px;
+		}
+		
+		.blog-comment img.avatar {
+			position: relative;
+			float: left;
+			margin-left: 0;
+			margin-top: 0;
+			width: 65px;
+			height: 65px;
+		}
+		
+		.blog-comment .post-comments{
+			border: 1px solid #eee;
+		    margin-bottom: 20px;
+		    margin-left: 85px;
+			margin-right: 0px;
+		    padding: 10px 20px;
+		    position: relative;
+		    -webkit-border-radius: 4px;
+		       -moz-border-radius: 4px;
+		       	 -o-border-radius: 4px;
+		    		border-radius: 4px;
+			background: #fff;
+			color: #6b6e80;
+			position: relative;
+		}
+		
+		.blog-comment .meta {
+			font-size: 13px;
+			color: #aaaaaa;
+			padding-bottom: 8px;
+			margin-bottom: 10px !important;
+			border-bottom: 1px solid #eee;
+		}
+		
+		.blog-comment ul.comments ul{
+			list-style-type: none;
+			padding: 0;
+			margin-left: 85px;
+		}
+		
+		.blog-comment-form{
+			padding-left: 15%;
+			padding-right: 15%;
+			padding-top: 40px;
+		}
+		
+		.blog-comment h3,
+		.blog-comment-form h3{
+			margin-bottom: 40px;
+			font-size: 26px;
+			line-height: 30px;
+			font-weight: 800;
+		}
+ */
+    </style>
+      
+    <script type="text/javascript">
+		$(document).ready(function() {
+			$(".btn-pref .btn").click(function () {
+			    $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
+			    // $(".tab").addClass("active"); // instead of this do the below 
+			    $(this).removeClass("btn-default").addClass("btn-primary");   
+			});
+		});
+	</script>
+	
+    <style type="text/css">
+		body {
+		    background-image: url("../images/TravellerFull.png");
+		    background-repeat: no-repeat;
+		    background-attachment: fixed;
+		    background-position: center; 
+		    background-size: 100% 100%;
+		}
+		
+		#post,#ok{
+		background: #196464;
+		}
+		
+		#post:hover, #ok:hover{
+		    background: #197575;
+		}
+    </style>
+   
+       
+    <!-- -------------------------------PLEASE COMMENT THIS IF THERE IS NO NETWORK------------------------------------------ -->
+    
+  <!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>  
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script> -->
+    
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>   
+    <link href="http://fonts.googleapis.com/css?family=Lato" rel='stylesheet' type='text/css'/>
+    <link href="http://fonts.googleapis.com/css?family=Lobster" rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>	 
+	
+	<link href="../assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
+
+	<script src="../assets/plugins/angular.js"></script>
+	
+	<script src="../Controllers/MainController.js"></script>
+	
+	<script type="text/javascript">
+    	$('.carousel').carousel({
+        	interval: 3000
+    	})
+	</script>
+</head>
+	
+<body ng-app="TravelDiary">
+	<!-------------- SIDE BAR ------------------>      
+    <a id="menu-toggle" href="#" class="btn btn-primary btn-lg toggle"><i class="fa fa-bars"></i></a>
+    <div id="sidebar-wrapper">
+	    <ul class="sidebar-nav">
+		    <li>
+		    	<a id="menu-close" href="#" class="btn btn-default btn-lg pull-right toggle">
+		       		<i class="fa fa-times"></i>
+		        </a>
+			</li>
+		    <li class="sidebar-brand">
+		    	<div ng-controller='UserProfileController'>
+                     <div ng-repeat="user in userInfo">
+		    	<a href="/Userprofile">{{user.first_name | capitalize}}'s</a>
+		    	</div>
+		    	</div>
+		    	
+		        <hr>
+		    </li>
+		    <li>
+		    	<a href="/userWall">Home</a>
+		    </li>
+		    <li><a href="#services">Services</a></li>
+		    <li><a href="#places">Places</a></li>
+		    <li><a href="#contact">Contact</a></li>
+		    <li><a href="#contact">Check IN</a></li>
+		    <!-- <li>
+		    	<div ng-app="TravelDiary" ng-controller="LogoutController" > <a href="/" ng-click="logout()">Logout</a> </div>
+		    </li> -->
+		</ul>
+	</div>
+	
+	<div style="padding: 5px"></div>
+		<div class="padding">
+			<div class="full col-sm-12" style="padding-top: 80px">                     
+                  <div class="row"> 
+                       <div class="col-sm-offset-1 col-sm-6">
+                       	   <!-- -------------------------- SHOW USERS DETAILS ------------------ -->
+                           <div class="panel panel-default" style="background-color: #338585 ;color:white">
+                               <div class="panel-body">
+                               		<!-- ------------------DISPLAY USER PROFILE PIC AND DETAILS------------------- -->
+                               		<div ng-controller='UserProfileController'>
+                                		<div ng-repeat="user in userInfo">
+                                 			<span>
+                                 				<p class="lead"> <img src="{{user.profile_image}}" width="28px" height="28px">       {{user.first_name | capitalize}}  {{user.last_name | capitalize}}</p>
+                                 			</span>
+                                  		</div>
+                                  	</div>
+                                  	
+                                  	<!-- ------------------DISPLAY NUMBER OF FOLLOWERS AND POSTS------------------- -->
+                                  	<div ng-controller="FollowersSelectController" >
+                                  		<p>{{totalFollowers[0]}} Followers, <div ng-controller="PostController"> {{totalPost[0]}} Posts</div></p>
+                                  	</div>
+                                </div>
+                           </div>
+                           
+                           <!-- ----------------------------- SEARCH --------------------------------- -->
+		                   <div class="well"  style="background-color: #CCE0E0">                               
+			                   <div class="input-group text-center">
+		    		               <input type="text" class="form-control input-lg" placeholder="Search">
+		            	           <span class="input-group-btn"><button id="ok" class="btn btn-lg btn-primary" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true" style="color:white"></span></button></span>
+		                       </div>
+		                   </div>
+                   
+                   		   <!-- ----------------------------- WHAT'S NEW --------------------------------- -->
+                           <div class="well" ng-controller="UserStoryController" style="background-color: #CCE0E0"> 
+                               <form ng-submit="submit()" class="form-horizontal" role="form">
+                                  	<h4>What's New</h4>
+                                  	<div class="form-group" style="padding:14px;">
+                                    	<input type="text" class="form-control" ng-model="tripName" placeholder="Your trip"/><br>	
+                                      	<input type="text" class="form-control" ng-model="source" placeholder="Your source"/><br>                                    
+                                      	<input type="text" class="form-control" ng-model="destination" placeholder="Your destination"/><br>                                	                                      
+                                      	<textarea class="form-control" ng-model="description" placeholder="Describe your trip"></textarea>
+                                  	</div>
+                                  	<input id="post" class="btn btn-primary pull-right" type="submit" value="Post"/>
+                                  	<ul class="list-inline">
+                                  		<li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li>
+                                  		<li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li>
+                                  		<li><a href="" ng-click="map=true"><i class="glyphicon glyphicon-map-marker"></i></a></li>
+                                  	</ul>   
+                                  	<!-- ------------------------------- CHECK INS--------------------------------- -->						   		                             
+		                           <div class="panel panel-default" ng-controller='CheckInController'>
+		                            	<div ng-app="mapLocation" class="panel-heading" style="background-color: #338585 ;color:white">
+		                            		<a href="#" class="pull-right">View all</a>
+		                            		<h4>Check-in</h4>  
+		                            	</div>                             
+		                                <form role="form" name="locate">
+			                                <div class="panel-body" ng-controller='UserProfileController'>
+			                                	<div ng-repeat="user in userInfo"><strong>{{user.first_name | capitalize}}  {{user.last_name | capitalize}} </strong> checked In at <span id="checkIn_info"></span></div>
+			                                    <div id="type-selector" class="controls">
+			                                    	<input id="pac-input" class="controls" name="place" type="text" ng-model="location" placeholder="Enter a location"/>                                                       
+			                                       	<div style="float:left" width="20px" style="padding-right: 20px"><span class="glyphicon glyphicon-map-marker">  </span> location </div>&nbsp;
+			                                        <div style="float:left" width="20px" ng-click="checkMeIn(location)">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-pushpin"></span> Post</div>
+			                                    </div>
+			                                    <div id="map" class="controls" style="height:380px;"></div>
+			                                    {{ locate.place.$dirty }}			                                                    
+			                                    <script src="./map.js"></script>
+			                                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC91D6J_58VSzB-uepdj7oVL2nFNDs2oJI&signed_in=true&libraries=places&callback=initMap" async defer></script>
+			                                </div>
+		                               </form>
+		                               {{ location }}
+		                           </div>                                               
+                               </form>
+                      		</div>
+                          
+                           <!-- -----------panel panel-default----------------- DISPLAY USERS STORIES ------------------------------ --> 
+                           <div class="panel-default" ng-controller='FollowersStoryDisplayController'>
+                           		<div ng-include = "'displayStory'"></div>                          		
+                           </div>                         
+						</div>
+
+					    <!-- ----------------------SUGGESTIONS----------------------- -->
+					    <div class="col-sm-4 ">
+			               <div class="panel panel-default">
+			                  <div class="panel-heading" style="background-color: #338585 ;color:white"><a href="#" class="pull-right">View all</a> <h4>Suggestions</h4></div>
+			                  <div class="panel-body">
+			                  		<ul class="list-group">
+			                     		<li class="list-group-item">
+			                         		<div class="media">
+				                         		<div class="media-left media-middle">
+					                          		<a href="#">
+					                              		<img class="media-object" height="50px" width="50px" src="../images/img/london.jpg" alt="...">
+					                                </a>
+				                           		</div>
+				                           		<div class="media-body">Middle aligned media</div>
+			                       			</div>
+			                     		</li>
+			                     		<li class="list-group-item">
+				                     		<div class="media">
+				                         		<div class="media-left media-middle">
+				                          			<a href="#">
+				                              			<img class="media-object" height="50px" width="50px" src="../images/img/london.jpg" alt="...">
+				                                    </a>
+				                           		</div>
+				                           		<div class="media-body">Middle aligned media</div>
+				                       		</div>
+			                     		</li>
+			                     		<li class="list-group-item">Thumbnails</li>
+			                     	</ul>       
+			                  </div>
+			               </div>
+						</div> 
+
+
+						<!-- ---------------------------ADS------------------------ -->	
+		                <div class="col-sm-4 ">
+			              <div class="panel panel-default">
+				              <div class="panel-heading" style="background-color: #338585 ;color:white"><a href="#" class="pull-right">View all</a> <h4>Ads</h4></div>
+				              <div class="panel-body">
+				              		<ul class="list-group">
+				                    	<div class="row" style="padding= 5px">
+				                        	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="3000">
+				                            	<ol class="carousel-indicators">
+				                               		<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+				                               		<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+				                               		<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+				                             	</ol>                         
+				                             	<div class="carousel-inner">
+				                               		<div class="item active">
+				                                 		<img  src="../images/img/makeMyTrip.jpg" alt="...">
+				                                 		<div class="carousel-caption"></div>
+				                               		</div>
+				                               		<div class="item">
+				                                 		<img src="../images/img/london.jpg" alt="...">
+				                                 		<div class="carousel-caption"></div>
+				                               		</div>
+				                               		<div class="item">
+				                                 		<img src="../assets/img/paris.jpg" alt="...">
+				                                 		<div class="carousel-caption"></div>
+				                               		</div>
+				                             	</div>
+				                            </div> 
+				                        </div>
+				                    </ul>
+				              	</div>
+						  	</div>
+						</div>
+					</div> 
+				</div>
+                
+                <!-- -----------------------LINKS-------------- -->         
+		        <div class="row">
+		        	<div class="col-sm-6">
+		            	<a href="#">Twitter</a> <small class="text-muted">|</small> <a href="#">Facebook</a> <small class="text-muted">|</small> <a href="#">Google+</a>
+		            </div>
+		        </div>
+                      
+                <div class="row" id="footer">    
+        			<div class="col-sm-6"></div>
+            		<div class="col-sm-6"></div>
+        		</div>
+                      
+                <hr>
+                <!-- --------------------FOOTER--------------------- -->
+        		<h4 class="text-center">
+        			<a href="http://bootply.com/96266" target="ext">My Travel Diary</a>
+        		</h4>
+        		<hr>
+			</div>
+			
+		    <script src="../assets/js/jquery-1.10.2.js"></script>
+		    <script src="../assets/js/bootstrap.js"></script>
+		    <script type="text/javascript" src="../assets/js/jquery.parallax-1.1.3.js"></script>
+		
+		    <script>
+		        $("#menu-close").click(function(e) {
+		            e.preventDefault();
+		            $("#sidebar-wrapper").toggleClass("active");
+		        });
+		    </script>
+		    <script>
+		        $("#menu-toggle").click(function(e) {
+		            e.preventDefault();
+		            $("#sidebar-wrapper").toggleClass("active");
+		        });
+		    </script>
+		    <script>
+		        $(function() {
+		            $('a[href*=#]:not([href=#])').click(function() {
+		                if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+		
+		                    var target = $(this.hash);
+		                    target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+		                    if (target.length) {
+		                        $('html,body').animate({
+		                            scrollTop: target.offset().top
+		                        }, 1000);
+		                        return false;
+		                    }
+		                }
+		            });
+		        });
+		    </script>
+			<script>
+		        $('.modal').on('shown.bs.modal', function () {
+		            var curModal = this;
+		            $('.modal').each(function(){
+		                if(this != curModal){
+		                    $(this).modal('hide');
+		                }
+		            });
+		        });
+		    </script>
+
+</body>
+</html>

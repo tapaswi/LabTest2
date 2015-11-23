@@ -1,0 +1,138 @@
+<div ng-controller='CommentDisplayController'>
+	<div ng-repeat="story in stories">
+		<script type="text/javascript">
+			function changePlaceholder(id){	
+				var obj = document.getElementById(comment).setAttribute("Placeholder", "Add a comment...");	
+			}
+		</script>
+	
+		<div ng-hide="myStory" ng-click="myStory=!myStory" class="panel-heading" style="background-color: #338585 ;color:white;margin-top:10px;">
+			<h4><p class="pull-right" >{{story.source | capitalize}}  To  {{story.destination | capitalize}}</p></h4> 
+			<!-- <a href="#" class="pull-right">View all</a>  -->
+			<h4>{{ story.tripName | capitalize}}</h4>
+			<!-- <a href="#" ng-click="deleteStory(story.trip_id)">Delete</a> -->
+			
+		</div>          
+		
+		
+		<div>
+			<a href="#" ng-click="deleteStory(story.trip_id)">Delete</a>
+			<!-- <a href="#" ng-click="updateStory(story.trip_id,story.tripName)">Edit</a> -->
+			<div ng-hide="editorStoryEnabled">
+				<!-- <i class="pull-right"> -->
+					<a href="#" ng-click="editorStoryEnabled=!editorStoryEnabled"><small>Edit</small></a>
+				<!-- </i> -->
+			</div>
+			<div ng-show="editorStoryEnabled" class="form-group" style="padding:14px;"> 
+				<input type="text" class="form-control" placeholder="Your trip" ng-model="story.tripName"/><br>
+				<input type="text" class="form-control" ng-model="story.description" placeholder="Your destination"/>
+				<a href="#" ng-click="editorStoryEnabled=!editorStoryEnabled; updateStory(story.trip_id,story.tripName,story.description)">Done</a> 						
+			</div>
+		</div>
+		
+		
+		
+										
+										
+										
+										
+		
+		<div ng-show="myStory" style="margin-top:10px;">   
+		<div  ng-click="myStory=!myStory" class="panel-heading" style="background-color: #338585 ;color:white">
+			<h4><p class="pull-right" >{{story.source | capitalize}}  To  {{story.destination | capitalize}}</p></h4> 
+			<!-- <a href="#" class="pull-right">View all</a>  -->
+			<h4>{{ story.tripName | capitalize}}</h4>
+		</div>          
+		<div class="panel-body panel">
+			<div class="jquery-script-ads" align="center" style="margin:20px auto;">
+				<script type="text/javascript"></script>
+				<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+			</div>
+			<div class="">
+				<!-- <h3>Europe</h3> -->
+				<div class="gallery" ng-controller='DisplayPhotosController'>
+		    		<div ng-repeat="photo in photos">
+		    			<div ng-if="story.trip_id==photo.trip_id">
+		    				<a href="../images/gallery/DSC_0008-660x441.jpg"><img src="{{photo.photo}}" width=38px" height="38px"></a>
+		    			</div>
+					</div>
+				</div>
+				<div class="clear"></div> 
+			</div>
+			<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+			<script src="../assets/js/zoom.min.js"></script>
+			<script type="text/javascript">
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-36251023-1']);
+				  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+				  _gaq.push(['_trackPageview']);
+				
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+			</script>
+			<div class="clearfix"></div>
+   			<hr>                                    
+    		<!-- <p> {{story.source | capitalize}}  To  {{story.destination | capitalize}}</p> --> 
+    		<p>{{story.description}} </p>                                  
+    		<hr>
+
+			<div ng-controller='CommentUpdateController'>
+            	<div ng-controller='CommentController'> 
+            	
+            		<form>
+       					<div class="input-group">			           	
+				           	<div class="input-group-btn" ng-controller='LikeCountController'>
+				           		<div ng-controller='LikeController'>
+				           			<div ng-repeat="likes in likeInfo">
+					            		<div ng-if="story.trip_id==likes.trip_id">
+				               				<button class="btn btn-default" ng-click="sendId(story.trip_id)">+{{likes.totalLikes}}</button>
+				               				<!-- <button class="btn btn-default"><i class="glyphicon glyphicon-share"></i></button> -->
+				               			</div>
+				                	</div>
+				                </div>
+				            </div>          
+				            <input id="comment" type="text" class="form-control" ng-model="mycomment" placeholder="Add a comment.."/>
+				            <span class="input-group-btn">
+					        	<button id="ok" class="btn btn-primary" ng-click="addComment(story.trip_id,mycomment); changePlaceholder()">            	
+					            	<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color:white"></span>
+					            </button>
+					        </span>
+	        			</div>
+	        		</form>
+	        		
+					<div class="blog-comment">       
+						<ul class="comments" ng-repeat="comment in comments">			
+							<div ng-if="story.trip_id==comment.trip_id">
+								<!-- <div>............{{getUserData(comment.user_id)}}</div>  -->
+								<li class="clearfix">
+									<img src="http://bootdey.com/img/Content/user_2.jpg" class="avatar" alt="">					
+									<div class="post-comments">
+										<p class="meta">
+											 {{comment.date  | date:'longDate'}}									
+										</p>
+										<!-- <p><a href="#">JohnDoe</a> says : </p> -->
+										<div ng-hide="editorEnabled">
+											<i class="pull-right">
+												<a href="#" ng-click="editorEnabled=!editorEnabled"><small>Edit </small></a>
+												<a href="#" ng-click="remove(comment.comment_id)"><small> Delete</small></a>
+											</i>
+											<p><a href="#">JohnDoe</a> says : {{comment.comment}}</p>
+										</div>
+										<div ng-show="editorEnabled"> 
+											<input ng-model="comment.comment"/>
+											<a href="#" ng-click="editorEnabled=!editorEnabled; updateComment(story.trip_id,comment.comment_id,comment.comment)">Done</a> 						
+										</div>															
+									</div>
+								</li>
+							</div>
+						</ul>
+					</div>									
+	        	</div>
+       	 	</div>                                       
+		</div>
+	</div>
+	</div>  
+</div>

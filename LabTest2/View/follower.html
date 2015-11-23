@@ -1,0 +1,24 @@
+<div ng-repeat="x in Followers">
+	<div class="col-lg-6">				
+		<div class="" style="background-color: #338585; color: white;">
+			<p></p>
+			<div class="panel-body">
+				<div style="float: left; padding: 0px">
+					<img src="{{x.profile_image}}" width="50px" height="50px">
+				</div>
+				<div style="float: left">
+					<p style="margin-left: 5px">
+						<b>{{x.first_name | capitalize}} {{ x.last_name | capitalize}}</b><br> 45 Followers<br>
+					</p>
+				</div>
+				<div style="float:right">
+					<p style="color: black" >
+						<a href="#" class="btn btn-default" role="button" ng-click="removeId(x.user_id)">
+						<span class="glyphicon glyphicon-ok-circle"></span>
+						<b> Following</b></a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

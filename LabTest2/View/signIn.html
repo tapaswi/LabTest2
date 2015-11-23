@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+       <style>
+@font-face {
+    font-family: 'Script MT Bold'; 
+    src: url(./fonts/SCRIPTBL.woff);
+}
+body {
+    background-image: url("../images/TravellerFull.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: 100% 100%;
+}
+.ng-invalid.ng-dirty{
+border-color: red;
+}
+.ng-valid.ng-dirty{
+    border-color: red;
+    }
+#header,#login{
+background: #196464;
+color:white;    
+}
+  </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    
+    <title>SignIn</title>
+    <!-- BOOTSTRAP CORE STYLE CSS -->
+    <link href="../assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FONTAWESOME STYLE CSS -->
+    <link href="../assets/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- CUSTOM STYLE CSS -->
+    <link href="../assets/css/style.css" rel="stylesheet" />    
+    <!-- GOOGLE FONT -->
+    <!-- link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' / -->
+    <link rel="stylesheet" href="../assets/css/signinFormValidation.css">
+        
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    
+    <script src="../assets/plugins/angular.js"></script>
+    <script src="../Controllers/SignInController.js"></script>
+</head>
+
+
+
+<body>
+<div ng-app="TravelDiary" ng-controller="SignInController">
+    <form ng-submit="submit()" name="loginForm"  novalidate>
+    	<div class="container">
+        	<div class="row text-center pad-top ">
+            	<div style="font-family: 'Script MT Bold';" class="col-md-12">
+                	<h2>Login</h2>
+           		</div>
+       		</div>
+         	<div class="row  pad-top">            
+                <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+                	<div class="panel panel-default">
+                    	<div style="font-family: 'Script MT Bold'; font-size:150%" class="panel-heading">
+                        	<strong>   Login...</strong>  
+                        </div>
+                        <div class="panel-body">
+                        	<form role="form"><br/>
+                            	<div class="form-group input-group">
+                                	<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                    <input type="email" name="email" class="form-control" ng-model="email_id" placeholder="Your Email ID" required/>   
+                                </div>
+                                <span style="color:red" ng-show="loginForm.email.$dirty && loginForm.email.$invalid">Email id invalid.</span>
+                                <div class="form-group input-group">
+                                	<span class="input-group-addon"><i class="glyphicon glyphicon-lock"  ></i></span>
+                                    <input type="password" class="form-control" ng-model="password" placeholder="Enter Password" required/>
+                                </div>
+                                
+                               <!-- {{ email_id }}
+                               {{ loginForm.$valid }} -->
+                                <input id="login" type="submit" class="btn btn-success " ng-submit= "loginForm.$valid" value="Login"><hr />Create new account? 
+                                <a href="signUp" >Register here</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    	</div>
+	</form>
+</div>	
+
+    <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
+    <!-- CORE JQUERY  -->
+    <script src="../assets/plugins/jquery-1.10.2.js"></script>
+    <!-- BOOTSTRAP SCRIPTS  -->
+    <script src="../assets/plugins/bootstrap.js"></script>
+</body>
+</html>
